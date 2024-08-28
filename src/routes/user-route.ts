@@ -11,7 +11,9 @@ class UserRouter {
 
   private configureRoutes(): void {
     this.router.post("/", UserController.addUser);
-    this.router.get("/:userId/purchases", UserController.recordPurchase);
+    this.router.get("/", UserController.getUser);
+    this.router.post("/:userId/purchases", UserController.recordPurchase);
+    this.router.get("/:userId/recommendations", UserController.getRecommendations);
   }
 
   public getRouter(): Router {

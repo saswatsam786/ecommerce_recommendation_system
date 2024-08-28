@@ -21,3 +21,12 @@ export const USER_PARAM_VALIDATION = Joi.object({
     "any.required": "User ID is a required field",
   }),
 });
+
+export const GET_USER_VALIDATION = Joi.object({
+  email: Joi.string().email().required().messages({
+    "string.base": "Email should be a type of text",
+    "string.empty": "Email cannot be an empty field",
+    "string.email": "Email must be a valid email",
+    "any.required": "Email is a required field",
+  }),
+});

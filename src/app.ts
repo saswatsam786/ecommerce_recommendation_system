@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
+import compression from "compression";
 import Database from "./base/database-store";
 import ProductRouter from "./routes/product-route";
 import UserRouter from "./routes/user-route";
@@ -25,6 +26,7 @@ class App {
   private initializeMiddlewares() {
     this.app_.use(express.json());
     this.app_.use(express.urlencoded({ extended: true }));
+    this.app_.use(compression());
     this.app_.use(
       cors({
         origin: "*",
