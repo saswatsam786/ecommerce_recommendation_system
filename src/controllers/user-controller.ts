@@ -50,7 +50,7 @@ class UserController {
         return next(createError(400, paramError.details[0].message));
       }
 
-      const user = await User.findById(paramValue);
+      const user = await User.findById(paramValue.userId);
       if (!user) {
         return next(createError(404, "User not found"));
       }
