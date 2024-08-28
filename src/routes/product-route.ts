@@ -11,6 +11,7 @@ class ProductRouter {
 
   private configureRoutes(): void {
     this.router.post("/", ProductControllers.addProduct);
+    this.router.get("/", ProductControllers.getProduct);
   }
 
   public getRouter(): Router {

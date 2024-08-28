@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ADD_PRODUCT_VALIDATION, createError, CustomError } from "../utilities";
+import { ADD_PRODUCT_VALIDATION, createError, CustomError, GET_PRODUCT_QUERY_VALIDATION } from "../utilities";
 import { Product } from "../models";
 
 class ProductController {
@@ -23,6 +23,24 @@ class ProductController {
       await product.save();
 
       return res.status(201).json({ success: true, message: "Product added successfully", data: product });
+    } catch (error) {
+      return next(createError((error as CustomError).status || 500, (error as Error).message));
+    }
+  };
+
+  public getProduct = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { error, value } = GET_PRODUCT_QUERY_VALIDATION.validate(req.query);
+
+      if (error) {
+        return next(createError(400, error.details[0].message));
+      }
+
+      const { page, limit } = value as { page: number; limit: number };
+      const skip = (page - 1) * limit;
+      const products = await Product.find().skip(skip).limit(limit);
+
+      return res.status(200).json({ success: true, message: "Products fetched successfully", data: products });
     } catch (error) {
       return next(createError((error as CustomError).status || 500, (error as Error).message));
     }

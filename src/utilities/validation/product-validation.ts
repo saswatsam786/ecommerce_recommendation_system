@@ -28,3 +28,17 @@ export const ADD_PRODUCT_VALIDATION = Joi.object({
     "any.required": "Description is a required field",
   }),
 });
+
+export const GET_PRODUCT_QUERY_VALIDATION = Joi.object({
+  page: Joi.number().integer().min(1).default(1).messages({
+    "number.base": "Page should be a number",
+    "number.integer": "Page must be an integer",
+    "number.min": "Page must be greater than or equal to 1",
+  }),
+  limit: Joi.number().integer().min(1).max(100).default(10).messages({
+    "number.base": "Limit should be a number",
+    "number.integer": "Limit must be an integer",
+    "number.min": "Limit must be greater than or equal to 1",
+    "number.max": "Limit must be less than or equal to 100",
+  }),
+});
