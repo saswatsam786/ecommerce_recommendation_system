@@ -6,7 +6,6 @@ export interface IProduct extends Document {
   category: ProtocolNamespace.Category;
   price: number;
   description: string;
-  createdAt: Date;
 }
 
 const ProductSchema: Schema = new Schema<IProduct>(
@@ -15,7 +14,6 @@ const ProductSchema: Schema = new Schema<IProduct>(
     category: { type: String, enums: Object.values(ProtocolNamespace.Category), required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

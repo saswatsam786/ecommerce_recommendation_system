@@ -3,12 +3,14 @@ import cors from "cors";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
 import Database from "./base/database-store";
+import ProductRouter from "./routes/product-route";
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 class App {
   private db_ = new Database(process.env.MONGO_URL as string);
   private app_ = express();
+  private productRoutes_ = new ProductRouter();
   private PORT_ = process.env.PORT || 6005;
   private isProduction = process.env.NODE_ENV === "production";
 
@@ -31,6 +33,7 @@ class App {
 
   private initializeRoutes() {
     this.app_.get("/test", (req, res) => res.send("Hello World!"));
+    this.app_.use("/api/product", this.productRoutes_.getRouter());
   }
 
   public get_app() {
