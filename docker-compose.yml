@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6005:6005"
+    env_file:
+      - .env.production
+    image: product_recommendation_system
+    restart: unless-stopped
