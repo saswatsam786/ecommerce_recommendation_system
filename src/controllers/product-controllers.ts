@@ -7,6 +7,7 @@ import {
   UPLOAD_PRODUCT_LIST_VALIDATION,
 } from "../utilities";
 import { Product } from "../models";
+import { ProtocolNamespace } from "../dto/types";
 
 class ProductController {
   public addProduct = async (req: Request, res: Response, next: NextFunction) => {
@@ -65,7 +66,7 @@ class ProductController {
         return next(createError(400, error.details[0].message));
       }
 
-      const products = value;
+      const products: ProtocolNamespace.IProduct[] = value;
 
       await Product.insertMany(products);
 
