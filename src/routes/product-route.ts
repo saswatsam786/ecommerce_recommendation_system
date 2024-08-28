@@ -12,6 +12,7 @@ class ProductRouter {
   private configureRoutes(): void {
     this.router.post("/", ProductControllers.addProduct);
     this.router.get("/", ProductControllers.getProduct);
+    this.router.post("/uploads", ProductControllers.uploadProducts);
   }
 
   public getRouter(): Router {
