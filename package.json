@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development nodemon dist/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Saswat Samal",
   "license": "ISC",
   "description": "",
   "devDependencies": {

@@ -77,3 +77,19 @@ export const UPLOAD_PRODUCT_LIST_VALIDATION = Joi.array()
     "array.includes": "Each item in the product list must be a valid product object",
     "any.required": "Product list is a required field",
   });
+
+export const RECORD_PURCHASE_VALIDATION = Joi.object({
+  productIds: Joi.array()
+    .items(
+      Joi.string().required().messages({
+        "string.base": "Product ID should be a type of text",
+        "string.empty": "Product ID cannot be an empty field",
+        "any.required": "Product ID is a required field",
+      })
+    )
+    .required()
+    .messages({
+      "array.base": "Product IDs should be an array",
+      "any.required": "Product IDs are required",
+    }),
+});
