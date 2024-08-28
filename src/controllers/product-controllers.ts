@@ -44,7 +44,12 @@ class ProductController {
 
       const { page, limit } = value as { page: number; limit: number };
       const skip = (page - 1) * limit;
-      const products = await Product.find().skip(skip).limit(limit);
+
+      const products = await Product.aggregate([
+        { $sample: { size: skip + limit } },
+        { $skip: skip },
+        { $limit: limit },
+      ]);
 
       return res.status(200).json({ success: true, message: "Products fetched successfully", data: products });
     } catch (error) {
