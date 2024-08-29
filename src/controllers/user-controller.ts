@@ -162,14 +162,6 @@ class UserController {
       }
 
       const { userId } = value;
-      const cacheKey = `recommendations_${userId}`;
-      const cachedRecommendations = cache.get(cacheKey);
-
-      if (cachedRecommendations) {
-        return res
-          .status(200)
-          .json({ success: true, message: "Recommendations fetched successfully", data: cachedRecommendations });
-      }
 
       const user = await User.findById(userId).lean();
       if (!user) {
@@ -183,8 +175,6 @@ class UserController {
 
       // @ts-ignore
       const recommendations = this.recommendProducts(user, products);
-
-      cache.set(cacheKey, recommendations);
 
       return res
         .status(200)

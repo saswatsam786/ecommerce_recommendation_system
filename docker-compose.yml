@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "6005:6005"
+      - "80:6005"
     env_file:
       - .env.production
     image: product_recommendation_system
